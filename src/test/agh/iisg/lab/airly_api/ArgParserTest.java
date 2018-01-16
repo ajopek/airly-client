@@ -1,4 +1,4 @@
-package test.agh.iisg.lab;
+package agh.iisg.lab.airly_api;
 
 import agh.iisg.lab.ArgParser;
 import agh.iisg.lab.ArgType;
@@ -21,7 +21,7 @@ import static org.junit.Assert.assertEquals;
 * @version 1.0 
 */ 
 public class ArgParserTest {
-    ArgParser parser = new ArgParser();;
+    private ArgParser parser = new ArgParser();
 
 /** 
 * 
@@ -32,6 +32,7 @@ public class ArgParserTest {
 public void testReadArgs() throws Exception {
     String[] args = {
             "--history",
+            "2",
             "--longtitude",
             "90",
             "--latitude",
@@ -40,7 +41,7 @@ public void testReadArgs() throws Exception {
     HashMap<ArgType, Optional<String>> parsed = parser.readArgs(args);
 
     assertEquals(true, parsed.get(ArgType.History).isPresent());
-    assertEquals( "true", parsed.get(ArgType.History).orElse("false"));
+    assertEquals( "2", parsed.get(ArgType.History).orElse(""));
     assertEquals("90", parsed.get(ArgType.Longtitiude).orElse(""));
     assertEquals("80", parsed.get(ArgType.Latitiude).orElse(""));
 } 

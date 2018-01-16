@@ -40,9 +40,9 @@ public class ArgParser {
 
     @Option(
             name = "--history",
-            usage = "Show history for specified sensor/ coordinates"
+            usage = "Specify time period for historical data for specified sensor/ coordinates"
     )
-    private static boolean history;
+    private static String history;
 
     @Option(
             name = "-k",
@@ -61,7 +61,7 @@ public class ArgParser {
             parsedArgs.put(ArgType.ApiKey, Optional.ofNullable(apiKey));
             parsedArgs.put(ArgType.Latitiude, Optional.ofNullable(latitude));
             parsedArgs.put(ArgType.Longtitiude, Optional.ofNullable(longtitude));
-            parsedArgs.put(ArgType.History, Optional.ofNullable(history ? "true" : null));
+            parsedArgs.put(ArgType.History, Optional.ofNullable(history));
         } catch (CmdLineException e) {
             System.err.println(e.getLocalizedMessage());
             cmdLineParser.printUsage(System.err);
