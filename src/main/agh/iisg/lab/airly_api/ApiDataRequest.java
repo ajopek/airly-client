@@ -9,10 +9,7 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Stream;
 
-import agh.iisg.lab.api_data_procesors.CurrentMeasurementPrinter;
-import agh.iisg.lab.api_data_procesors.ForecastPrinter;
-import agh.iisg.lab.api_data_procesors.HistoryPrinter;
-import agh.iisg.lab.api_data_procesors.IApiDataProcessor;
+import agh.iisg.lab.api_data_procesors.*;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -141,6 +138,7 @@ public class ApiDataRequest {
         proce.add(new CurrentMeasurementPrinter());
         proce.add(new ForecastPrinter());
         proce.add(new HistoryPrinter());
+        proce.add(new AsciiArtPrinter());
         ApiDataRequest request = new ApiDataRequest(arguments, RequestType.MapPoint, proce);
     }
 }
