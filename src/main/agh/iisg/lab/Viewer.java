@@ -1,12 +1,17 @@
 package agh.iisg.lab;
 
+import agh.iisg.lab.airly_api.ApiDataRequest;
 import agh.iisg.lab.airly_api.RequestType;
+import agh.iisg.lab.api_data_procesors.*;
 
 import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
 import java.util.Optional;
 
 public class Viewer {
     private HashMap<ArgType, String> executionOptions = new HashMap<>();
+    private List<IApiDataProcessor> processors = new LinkedList<>();
 
     public Viewer(HashMap<ArgType, Optional<String>> parsedArgs) {
                 parsedArgs.entrySet().stream()
@@ -17,9 +22,10 @@ public class Viewer {
 
     private void putApiKey() {
         String apiKey = System.getenv("API_KEY");
-        if (apiKey.isEmpty()) {
+        if (apiKey == null || apiKey.isEmpty()) {
             if (!executionOptions.containsKey(ArgType.ApiKey)) {
-                throw new IllegalArgumentException("No api key has been specified.");
+                throw new IllegalArgumentException("Specify api key in API_KEY system variable, or as argument." +
+                                                   "\n For more information use --help.");
             }
         } else {
             executionOptions.put(ArgType.ApiKey, apiKey);
@@ -40,7 +46,26 @@ public class Viewer {
         return type;
     }
 
+    private void addDataProcessors() {
+        if (executionOptions.containsKey(ArgType.History)) {
+            processors.add(new HistoryPrinter());
+        }
+        processors.add(new ForecastPrinter());
+        processors.add(new CurrentMeasurementPrinter());
+        processors.add(new AsciiArtPrinter());
+    }
+
     public void execute() {
+        try {
+            putApiKey();
+            RequestType requestType = getRequestType();
+            addDataProcessors();
+            new ApiDataRequest(executionOptions, requestType, processors);
+        } catch (IllegalArgumentException e) {
+            System.err.println("There were errors while executing your request:");
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
 
     }
 }
