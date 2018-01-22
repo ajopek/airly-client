@@ -45,7 +45,7 @@ public class ArgParser {
     private static String history;
 
     @Option(
-            name = "-k",
+            name = "--k",
             aliases = {"--api-key"},
             usage = "If api-key is not in API_KEY system variable, specify it in this option"
     )
@@ -57,6 +57,9 @@ public class ArgParser {
         CmdLineParser cmdLineParser = new CmdLineParser(this);
         try {
             cmdLineParser.parseArgument(args);
+            if(help) {
+                throw new CmdLineException("");
+            }
             parsedArgs.put(ArgType.SensorId, Optional.ofNullable(sensorId));
             parsedArgs.put(ArgType.ApiKey, Optional.ofNullable(apiKey));
             parsedArgs.put(ArgType.Latitiude, Optional.ofNullable(latitude));
