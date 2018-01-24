@@ -136,9 +136,7 @@ public class ApiDataRequest {
         arguments.put(ArgType.Latitiude, "50.06201");
         List <IApiDataProcessor> proce = new LinkedList<>();
         proce.add(new CurrentMeasurementPrinter());
-        proce.add(new ForecastPrinter());
         proce.add(new HistoryPrinter());
-        proce.add(new AsciiArtPrinter());
         ApiDataRequest request = new ApiDataRequest(arguments, RequestType.MapPoint, proce);
     }
 }

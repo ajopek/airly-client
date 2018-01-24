@@ -47,12 +47,10 @@ public class Viewer {
     }
 
     private void addDataProcessors() {
+        processors.add(new CurrentMeasurementPrinter());
         if (executionOptions.containsKey(ArgType.History)) {
             processors.add(new HistoryPrinter());
         }
-        processors.add(new ForecastPrinter());
-        processors.add(new CurrentMeasurementPrinter());
-        processors.add(new AsciiArtPrinter());
     }
 
     public void execute() {

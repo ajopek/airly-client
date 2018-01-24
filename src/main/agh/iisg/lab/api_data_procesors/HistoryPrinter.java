@@ -11,7 +11,8 @@ public class HistoryPrinter extends Printer {
         return header;
     }
 
-    String processData(AirlyData data) {
+    @Override
+    protected String processData(AirlyData data) {
         return data.getHistory().stream()
                 .map(PrintableMeasurementWithDate::new)
                 .map(PrintableMeasurementWithDate::toString)

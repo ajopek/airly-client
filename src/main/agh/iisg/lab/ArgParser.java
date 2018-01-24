@@ -5,6 +5,7 @@ import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
 import org.kohsuke.args4j.spi.BooleanOptionHandler;
+import org.kohsuke.args4j.spi.ExplicitBooleanOptionHandler;
 
 import java.util.HashMap;
 import java.util.Optional;
@@ -40,9 +41,10 @@ public class ArgParser {
 
     @Option(
             name = "--history",
-            usage = "Specify time period for historical data for specified sensor/ coordinates"
+            usage = "Specify time period for historical data for specified sensor/ coordinates",
+            handler = ExplicitBooleanOptionHandler.class
     )
-    private static String history;
+    private static boolean history;
 
     @Option(
             name = "--k",
@@ -64,7 +66,7 @@ public class ArgParser {
             parsedArgs.put(ArgType.ApiKey, Optional.ofNullable(apiKey));
             parsedArgs.put(ArgType.Latitiude, Optional.ofNullable(latitude));
             parsedArgs.put(ArgType.Longtitiude, Optional.ofNullable(longtitude));
-            parsedArgs.put(ArgType.History, Optional.ofNullable(history));
+            if (history) parsedArgs.put(ArgType.History, Optional.ofNullable("true"));
         } catch (CmdLineException e) {
             System.err.println(e.getLocalizedMessage());
             cmdLineParser.printUsage(System.err);

@@ -1,4 +1,4 @@
-package agh.iisg.lab.airly_api;
+package agh.iisg.lab;
 
 import agh.iisg.lab.ArgParser;
 import agh.iisg.lab.ArgType;
