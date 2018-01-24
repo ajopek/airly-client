@@ -1,10 +1,8 @@
 package agh.iisg.lab;
 
 import org.kohsuke.args4j.Option;
-import org.kohsuke.args4j.Argument;
 import org.kohsuke.args4j.CmdLineException;
 import org.kohsuke.args4j.CmdLineParser;
-import org.kohsuke.args4j.spi.BooleanOptionHandler;
 import org.kohsuke.args4j.spi.ExplicitBooleanOptionHandler;
 
 import java.util.HashMap;
@@ -13,22 +11,22 @@ import java.util.Optional;
 public class ArgParser {
     @Option(
             name = "--latitude",
-            usage = "Specify latitude, works only with '--longtitude'.",
-            depends = {"--longtitude"}
+            usage = "Specify latitude, works only with '--longitude'.",
+            depends = {"--longitude"}
     )
     private static String latitude;
 
     @Option(
-            name = "--longtitude",
-            usage = "Specify longtitude, works only with '--latitude'.",
+            name = "--longitude",
+            usage = "Specify longitude, works only with '--latitude'.",
             depends = {"--latitude"}
     )
-    private static String longtitude;
+    private static String longitude;
 
     @Option(
             name = "--sensor-id",
             usage = "Specify sensor id.",
-            forbids = {"--latitude", "--longtitude"}
+            forbids = {"--latitude", "--longitude"}
     )
     private static String sensorId;
 
@@ -41,7 +39,7 @@ public class ArgParser {
 
     @Option(
             name = "--history",
-            usage = "Specify time period for historical data for specified sensor/ coordinates",
+            usage = "Show also historical data for given sensor/map point",
             handler = ExplicitBooleanOptionHandler.class
     )
     private static boolean history;
@@ -64,8 +62,8 @@ public class ArgParser {
             }
             parsedArgs.put(ArgType.SensorId, Optional.ofNullable(sensorId));
             parsedArgs.put(ArgType.ApiKey, Optional.ofNullable(apiKey));
-            parsedArgs.put(ArgType.Latitiude, Optional.ofNullable(latitude));
-            parsedArgs.put(ArgType.Longtitiude, Optional.ofNullable(longtitude));
+            parsedArgs.put(ArgType.Latitude, Optional.ofNullable(latitude));
+            parsedArgs.put(ArgType.Longitude, Optional.ofNullable(longitude));
             if (history) parsedArgs.put(ArgType.History, Optional.ofNullable("true"));
         } catch (CmdLineException e) {
             System.err.println(e.getLocalizedMessage());

@@ -19,7 +19,7 @@ public class PrintableMeasurement {
 
         @Override
         public String toString() {
-            return name + ": " + (value == null ? "Brak danych" : value.toString() + " " + unit);
+            return name + ": " + (value == null ? "Brak danych" : String.format("%.2f", value) + " " + unit);
         }
     }
 
@@ -27,7 +27,7 @@ public class PrintableMeasurement {
     private MeasurementValue pm10 = new MeasurementValue("PM10", "μg/m^3");
     private MeasurementValue pm25 = new MeasurementValue("PM2.5", "μg/m^3");
     private MeasurementValue pollutionLevel = new MeasurementValue("Jakość potwietrza", "(według wskaźnika CAQI)");
-    private MeasurementValue pressure = new MeasurementValue("Ciśnienie", "hPa");
+    private MeasurementValue pressure = new MeasurementValue("Ciśnienie", "Pa");
     private MeasurementValue temperature = new MeasurementValue("Temperatura", "°C");
     private MeasurementValue humidity = new MeasurementValue("Wilgotność", "%");
 

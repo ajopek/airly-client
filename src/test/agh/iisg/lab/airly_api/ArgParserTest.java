@@ -2,14 +2,11 @@ package agh.iisg.lab.airly_api;
 
 import agh.iisg.lab.ArgParser;
 import agh.iisg.lab.ArgType;
-import com.sun.org.apache.xpath.internal.Arg;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 
 import java.util.HashMap;
 import java.util.Optional;
-import java.util.function.Supplier;
 
 import static org.junit.Assert.assertEquals;
 
@@ -42,8 +39,8 @@ public void testReadArgs() throws Exception {
 
     assertEquals(true, parsed.get(ArgType.History).isPresent());
     assertEquals( "2", parsed.get(ArgType.History).orElse(""));
-    assertEquals("90", parsed.get(ArgType.Longtitiude).orElse(""));
-    assertEquals("80", parsed.get(ArgType.Latitiude).orElse(""));
+    assertEquals("90", parsed.get(ArgType.Longitude).orElse(""));
+    assertEquals("80", parsed.get(ArgType.Latitude).orElse(""));
 } 
 
 

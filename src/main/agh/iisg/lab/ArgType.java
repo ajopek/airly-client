@@ -1,8 +1,8 @@
 package agh.iisg.lab;
 
 public enum ArgType {
-    Latitiude,
-    Longtitiude,
+    Latitude,
+    Longitude,
     SensorId,
     History,
     ApiKey

@@ -34,7 +34,7 @@ public class Viewer {
 
     private RequestType getRequestType() {
         RequestType type = null;
-        if (executionOptions.containsKey(ArgType.Latitiude) && executionOptions.containsKey(ArgType.Longtitiude)) {
+        if (executionOptions.containsKey(ArgType.Latitude) && executionOptions.containsKey(ArgType.Longitude)) {
             type = RequestType.MapPoint;
         }
         if (executionOptions.containsKey(ArgType.SensorId)) {

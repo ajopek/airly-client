@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Stream;
 
 import agh.iisg.lab.api_data_procesors.*;
 import okhttp3.OkHttpClient;
@@ -63,7 +62,7 @@ public class ApiDataRequest {
         Call<AirlyData> call = null;
         switch (requestType) {
             case MapPoint:
-                call = service.mapPointData(args.get(ArgType.Latitiude), args.get(ArgType.Longtitiude), args.get(ArgType.ApiKey));
+                call = service.mapPointData(args.get(ArgType.Latitude), args.get(ArgType.Longitude), args.get(ArgType.ApiKey));
                 break;
             case Sensor:
                 call = service.sensorData(args.get(ArgType.SensorId), args.get(ArgType.ApiKey));
@@ -102,7 +101,6 @@ public class ApiDataRequest {
      * Sets response QualityMeasurement object or throws IOException if data request failed.
      */
     private void handleResponse(Call call, Response<AirlyData> response) throws IOException {
-        // TODO Handle rest of response codes
         switch (response.code()) {
             case 403:
                 throw new IOException("Forbiden, bad api key");
@@ -132,8 +130,8 @@ public class ApiDataRequest {
     public static void main(String[] args) {
         HashMap<ArgType, String> arguments = new HashMap<>();
         arguments.put(ArgType.ApiKey, "b2c7e93da1114e88b85eaad4e2948121");
-        arguments.put(ArgType.Longtitiude, "19.94098");
-        arguments.put(ArgType.Latitiude, "50.06201");
+        arguments.put(ArgType.Longitude, "19.94098");
+        arguments.put(ArgType.Latitude, "50.06201");
         List <IApiDataProcessor> proce = new LinkedList<>();
         proce.add(new CurrentMeasurementPrinter());
         proce.add(new HistoryPrinter());
