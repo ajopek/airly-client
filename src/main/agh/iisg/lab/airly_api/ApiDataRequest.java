@@ -105,15 +105,15 @@ public class ApiDataRequest {
         // TODO Handle rest of response codes
         switch (response.code()) {
             case 403:
-                throw new IOException("Forbiden");
+                throw new IOException("Forbiden, bad api key");
             case 400:
-                break;
+                throw new IOException("Invalid input error: \n" + "Invalid sensor_id or map coordinates");
             case 401:
                 throw new IOException("Unauthorized");
             case 404:
-                break;
+                throw new IOException("Not found");
             case 500:
-                break;
+                throw new IOException("Unexpected error" );
             case 200:
                 applyProcessors(response.body());
                 System.exit(0);
